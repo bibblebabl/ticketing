@@ -1,20 +1,17 @@
-import express, { Request, Response } from "express";
-import { body, validationResult } from "express-validator";
-import { RequestValidationError, DatabaseConnectionError } from "../errors";
+import express from "express";
+import { body } from "express-validator";
+import { currentUserController } from "../controllers/current-user";
+import { signInController } from "../controllers/sign-in";
+import { signOutController } from "../controllers/sign-out";
+import { signUpController } from "../controllers/sign-up";
 
 const usersRouter = express.Router();
 
-usersRouter.get("/currentuser", (req, res) => {
-  res.send("Hi there!");
-});
+usersRouter.get("/currentuser", currentUserController);
 
-usersRouter.post("/signin", (req, res) => {
-  res.send("Hi there!");
-});
+usersRouter.post("/signin", signInController);
 
-usersRouter.post("/signout", (req, res) => {
-  res.send("Hi there!");
-});
+usersRouter.post("/signout", signOutController);
 
 usersRouter.post(
   "/signup",
@@ -25,18 +22,7 @@ usersRouter.post(
       .isLength({ min: 4, max: 20 })
       .withMessage("Password must be between 4 and 20 characters"),
   ],
-  async (req: Request, res: Response) => {
-    const errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-      throw new RequestValidationError(errors.array());
-    }
-
-    console.log("Creating a user...");
-    throw new DatabaseConnectionError();
-
-    res.send({});
-  }
+  signUpController
 );
 
 export { usersRouter };
