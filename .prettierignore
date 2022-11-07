@@ -1,0 +1,5 @@
+**/.git
+**/.hg
+**/node_modules
+pnpm-lock.yaml
+package.json
