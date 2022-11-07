@@ -1,13 +1,13 @@
-import mongoose, { Document, Error } from 'mongoose'
+import mongoose, { Document } from 'mongoose'
 import bcrypt from 'bcrypt'
 import { BadRequestError } from '../errors'
+
+const HASH_ROUNDS = 10
 
 interface IUser extends Document {
   email: string
   password: string
 }
-
-const HASH_ROUNDS = 10
 
 const userSchema = new mongoose.Schema<IUser>({
   email: {
