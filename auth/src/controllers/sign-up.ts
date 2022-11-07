@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import { validationResult } from 'express-validator'
-import { RequestValidationError } from '../errors'
+import { BadRequestError, RequestValidationError } from '../errors'
 import { User } from '../models/user'
 
 export const signUpController = async (req: Request, res: Response) => {
@@ -15,14 +15,10 @@ export const signUpController = async (req: Request, res: Response) => {
   const existingUser = await User.findOne({ email })
 
   if (existingUser) {
-    console.log('Email in use')
-    return res.send({})
+    throw new BadRequestError('Email in use')
   }
 
-  const user = new User({
-    email,
-    password,
-  })
+  const user = new User({ email, password })
 
   await user.save()
 
