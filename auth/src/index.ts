@@ -34,6 +34,10 @@ app.all('*', async () => {
 app.use(errorHandler)
 
 const init = async () => {
+  if (!process.env.JWT_KEY) {
+    throw new Error('process.env.JWT_KEY must be defined')
+  }
+
   try {
     await mongoose.connect(config.mongoDbUri)
     console.log('Connected to MongoDB')

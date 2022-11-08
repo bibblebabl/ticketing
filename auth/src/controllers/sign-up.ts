@@ -29,7 +29,7 @@ export const signUpController = async (req: Request, res: Response) => {
       id: user.id,
       email: user.email,
     },
-    'kdjsd',
+    process.env.JWT_KEY!,
   )
 
   req.session = {
