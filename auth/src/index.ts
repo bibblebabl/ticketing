@@ -1,6 +1,7 @@
 import express from 'express'
 import 'express-async-errors'
 import { json } from 'body-parser'
+import cookieSession from 'cookie-session'
 
 import mongoose from 'mongoose'
 
@@ -14,7 +15,15 @@ const config = {
 }
 
 const app = express()
+
+app.set('trust proxy', true) // for ingress-nginx
 app.use(json())
+app.use(
+  cookieSession({
+    signed: false,
+    secure: true,
+  }),
+)
 
 app.use('/api/users', usersRouter)
 
