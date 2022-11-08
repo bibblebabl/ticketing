@@ -9,16 +9,28 @@ interface IUser extends Document {
   password: string
 }
 
-const userSchema = new mongoose.Schema<IUser>({
-  email: {
-    type: String,
-    required: true,
+const userSchema = new mongoose.Schema<IUser>(
+  {
+    email: {
+      type: String,
+      required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
   },
-  password: {
-    type: String,
-    required: true,
+  {
+    toJSON: {
+      transform(doc, ret) {
+        ret.id = ret._id
+        delete ret._id
+        delete ret.__v
+        delete ret.password
+      },
+    },
   },
-})
+)
 
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next()
