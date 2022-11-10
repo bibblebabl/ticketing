@@ -25,8 +25,6 @@ export const signInController = async (req: Request, res: Response) => {
     throw new BadRequestError('Invalid password')
   }
 
-  console.log(existingUser.id)
-
   const userJwt = jwt.sign(
     {
       id: existingUser.id,
