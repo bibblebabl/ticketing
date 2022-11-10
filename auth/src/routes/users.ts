@@ -3,12 +3,11 @@ import { currentUserController } from '../controllers/current-user'
 import { signInController, signInValidator } from '../controllers/sign-in'
 import { signOutController } from '../controllers/sign-out'
 import { signUpController, signUpValidator } from '../controllers/sign-up'
-import { currentUser } from '../middlewares/current-user'
-import { validateRequest } from '../middlewares/validate-request'
+import { currentUser, requireAuth, validateRequest } from '../middlewares'
 
 const usersRouter = express.Router()
 
-usersRouter.get('/currentuser', currentUser, currentUserController)
+usersRouter.get('/currentuser', currentUser, requireAuth, currentUserController)
 
 usersRouter.post('/signout', signOutController)
 
