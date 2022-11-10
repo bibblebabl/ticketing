@@ -1,8 +1,16 @@
 import { Request, Response } from 'express'
-import { validationResult } from 'express-validator'
+import { body, validationResult } from 'express-validator'
 import { BadRequestError, RequestValidationError } from '../errors'
 import { User } from '../models/user'
 import jwt from 'jsonwebtoken'
+
+export const signUpValidator = [
+  body('email').isEmail().withMessage('Email must be valid'),
+  body('password')
+    .trim()
+    .isLength({ min: 4, max: 20 })
+    .withMessage('Password must be between 4 and 20 characters'),
+]
 
 export const signUpController = async (req: Request, res: Response) => {
   const errors = validationResult(req)

@@ -1,10 +1,8 @@
 import express from 'express'
 import { currentUserController } from '../controllers/current-user'
-import { signInController } from '../controllers/sign-in'
+import { signInController, signInValidator } from '../controllers/sign-in'
 import { signOutController } from '../controllers/sign-out'
-import { signUpController } from '../controllers/sign-up'
-import { signInValidator } from '../validators/sign-in'
-import { signUpValidator } from '../validators/sign-up'
+import { signUpController, signUpValidator } from '../controllers/sign-up'
 
 const usersRouter = express.Router()
 
