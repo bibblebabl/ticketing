@@ -1,5 +1,7 @@
-import { Request, Response } from "express";
+import { Request, Response } from 'express'
 
 export const signOutController = (req: Request, res: Response) => {
-  res.send("Hi there!");
-};
+  req.session = null
+
+  res.send({})
+}
