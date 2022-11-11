@@ -5,6 +5,8 @@ import { app } from '../src/app'
 let mongo: any
 
 beforeAll(async () => {
+  process.env.JWT_KEY = 'jtw-token'
+
   mongo = await MongoMemoryServer.create()
   const mongoUri = mongo.getUri()
 
