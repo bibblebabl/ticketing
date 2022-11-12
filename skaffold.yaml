@@ -10,6 +10,14 @@ build:
             dest: .
       docker:
         dockerfile: Dockerfile
+    - image: bibblebabl/client
+      context: client
+      sync:
+        manual:
+          - src: '**/*.ts'
+            dest: .
+      docker:
+        dockerfile: Dockerfile
   local:
     push: false
 manifests:
