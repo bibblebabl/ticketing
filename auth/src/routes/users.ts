@@ -7,7 +7,7 @@ import { currentUser, requireAuth, validateRequest } from '../middlewares'
 
 const usersRouter = express.Router()
 
-usersRouter.get('/currentuser', currentUser, requireAuth, currentUserController)
+usersRouter.get('/currentuser', currentUser, currentUserController)
 
 usersRouter.post('/signout', signOutController)
 
