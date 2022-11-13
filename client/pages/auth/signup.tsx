@@ -2,20 +2,31 @@ import Head from 'next/head'
 import { useState } from 'react'
 import axios from 'axios'
 
+type CustomError = { message: string; field?: string }
+
 export default function SignUp() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [errors, setErrors] = useState<CustomError[]>([])
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     console.log(email, password)
 
-    const response = await axios.post('/api/users/signup', {
-      email,
-      password,
-    })
-
-    console.log(response)
+    try {
+      const response = await axios.post('/api/users/signup', {
+        email,
+        password,
+      })
+      console.log(response)
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        console.log(error.response.data)
+        setErrors(error.response.data?.errors)
+      } else {
+        console.log(error)
+      }
+    }
   }
 
   return (
@@ -51,6 +62,16 @@ export default function SignUp() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
+          {!!errors.length && (
+            <div className="alert alert-danger">
+              <h4>Oopss...</h4>
+              <ul className="my-0">
+                {errors.map((err) => (
+                  <li key={err.message}>{err.message}</li>
+                ))}
+              </ul>
+            </div>
+          )}
           <button type="submit" className="btn btn-primary">
             Submit
           </button>
