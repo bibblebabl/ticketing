@@ -7,6 +7,8 @@ export function useRequest(url: string, method: Method, body: any) {
   const [errors, setErrors] = useState<CustomError[]>([])
 
   const makeRequest = async () => {
+    setErrors([])
+
     try {
       const response = await axios({
         method,
