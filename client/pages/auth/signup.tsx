@@ -2,21 +2,33 @@ import Head from 'next/head'
 import { useState } from 'react'
 import axios from 'axios'
 import { useRequest } from '../../hooks/use-request'
+import Router from 'next/router'
 
 type CustomError = { message: string; field?: string }
 
 export default function SignUp() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const { makeRequest, errors } = useRequest('/api/users/signup', 'POST', {
-    email,
-    password,
-  })
+  const { makeRequest, errors } = useRequest(
+    {
+      url: '/api/users/signup',
+      method: 'POST',
+      data: {
+        email,
+        password,
+      },
+    },
+    () => {
+      Router.push('/')
+    },
+  )
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
-    makeRequest()
+    try {
+      await makeRequest()
+    } catch (error) {}
   }
 
   return (
