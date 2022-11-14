@@ -1,32 +1,22 @@
 import Head from 'next/head'
 import { useState } from 'react'
 import axios from 'axios'
+import { useRequest } from '../../hooks/use-request'
 
 type CustomError = { message: string; field?: string }
 
 export default function SignUp() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [errors, setErrors] = useState<CustomError[]>([])
+  const { makeRequest, errors } = useRequest('/api/users/signup', 'POST', {
+    email,
+    password,
+  })
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    console.log(email, password)
 
-    try {
-      const response = await axios.post('/api/users/signup', {
-        email,
-        password,
-      })
-      console.log(response)
-    } catch (error) {
-      if (axios.isAxiosError(error) && error.response) {
-        console.log(error.response.data)
-        setErrors(error.response.data?.errors)
-      } else {
-        console.log(error)
-      }
-    }
+    makeRequest()
   }
 
   return (
@@ -38,6 +28,7 @@ export default function SignUp() {
       </Head>
 
       <main>
+        <h1>Sign Up</h1>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="exampleInputEmail1">Email address</label>
