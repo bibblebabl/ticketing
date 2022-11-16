@@ -1,7 +1,15 @@
+import axios from 'axios'
+import { NextPageContext } from 'next'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 
-export default function Home() {
+type User = {
+  id: string
+  email: string
+}
+
+export default function Home({ currentUser }: { currentUser: null | User }) {
+  console.log(currentUser)
   return (
     <div className={styles.container}>
       <Head>
@@ -17,4 +25,24 @@ export default function Home() {
       </main>
     </div>
   )
+}
+
+Home.getInitialProps = async (ctx: NextPageContext) => {
+  // if (typeof window === 'undefined')
+  try {
+    const response = await axios({
+      url: '/api/users/currentuser',
+      method: 'GET',
+      headers: ctx?.req?.headers?.cookie ? { cookie: ctx.req.headers.cookie } : undefined,
+      withCredentials: true,
+    })
+
+    return {
+      currentUser: response.data.currentUser,
+    }
+  } catch (error) {
+    return {
+      currentUser: null,
+    }
+  }
 }
