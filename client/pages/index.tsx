@@ -31,6 +31,8 @@ Home.getInitialProps = async (ctx: NextPageContext) => {
   const client = buildClient(ctx)
   const { data } = await client.get('/api/users/currentuser')
 
+  console.log('home page')
+
   return data
 }
 
