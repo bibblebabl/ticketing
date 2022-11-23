@@ -43,21 +43,20 @@ export default function SignUp() {
         <h1>Sign Up</h1>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="exampleInputEmail1">Email address</label>
+            <label htmlFor="email">Email address</label>
             <input
               value={email}
               type="email"
               name="email"
               className="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="email"
+              id="email"
               placeholder="Enter email"
-              autoComplete="true"
+              autoComplete="email"
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="form-group">
-            <label htmlFor="exampleInputPassword1">Password</label>
+            <label htmlFor="password">Password</label>
             <input
               value={password}
               type="password"
@@ -65,7 +64,7 @@ export default function SignUp() {
               className="form-control"
               id="password"
               placeholder="Password"
-              autoComplete="true"
+              autoComplete="password"
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
