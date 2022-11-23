@@ -47,9 +47,10 @@ export default function SignUp() {
             <input
               value={email}
               type="email"
+              name="email"
               className="form-control"
               id="exampleInputEmail1"
-              aria-describedby="emailHelp"
+              aria-describedby="email"
               placeholder="Enter email"
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -59,6 +60,7 @@ export default function SignUp() {
             <input
               value={password}
               type="password"
+              name="password"
               className="form-control"
               id="exampleInputPassword1"
               placeholder="Password"

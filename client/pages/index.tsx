@@ -8,7 +8,7 @@ type User = {
   email: string
 }
 
-export default function Home({ currentUser }: { currentUser: null | User }) {
+const Home = ({ currentUser }: { currentUser: null | User }) => {
   console.log(currentUser)
   return (
     <div className={styles.container}>
@@ -20,7 +20,7 @@ export default function Home({ currentUser }: { currentUser: null | User }) {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          {currentUser ? `User email: ${currentUser.email}` : `You are not signed in`}
         </h1>
       </main>
     </div>
@@ -33,3 +33,5 @@ Home.getInitialProps = async (ctx: NextPageContext) => {
 
   return data
 }
+
+export default Home
