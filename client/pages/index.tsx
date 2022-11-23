@@ -9,7 +9,6 @@ type User = {
 }
 
 const Home = ({ currentUser }: { currentUser: null | User }) => {
-  console.log(currentUser)
   return (
     <div className={styles.container}>
       <Head>
@@ -30,8 +29,6 @@ const Home = ({ currentUser }: { currentUser: null | User }) => {
 Home.getInitialProps = async (ctx: NextPageContext) => {
   const client = buildClient(ctx)
   const { data } = await client.get('/api/users/currentuser')
-
-  console.log('home page')
 
   return data
 }

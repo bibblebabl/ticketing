@@ -1,4 +1,3 @@
-// import '../styles/globals.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import type { AppContext, AppProps } from 'next/app'
 import { buildClient } from '../api/build-client'
@@ -31,7 +30,7 @@ AppComponent.getInitialProps = async ({ ctx, Component }: AppContext) => {
 
   return {
     pageProps,
-    currentUser: data,
+    currentUser: data.currentUser,
   }
 }
 
