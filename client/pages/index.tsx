@@ -1,6 +1,6 @@
-import axios from 'axios'
 import { NextPageContext } from 'next'
 import Head from 'next/head'
+import { buildClient } from '../api/build-client'
 import styles from '../styles/Home.module.css'
 
 type User = {
@@ -28,21 +28,8 @@ export default function Home({ currentUser }: { currentUser: null | User }) {
 }
 
 Home.getInitialProps = async (ctx: NextPageContext) => {
-  // if (typeof window === 'undefined')
-  try {
-    const response = await axios({
-      url: '/api/users/currentuser',
-      method: 'GET',
-      headers: ctx?.req?.headers?.cookie ? { cookie: ctx.req.headers.cookie } : undefined,
-      withCredentials: true,
-    })
+  const client = buildClient(ctx)
+  const { data } = await client.get('/api/users/currentuser')
 
-    return {
-      currentUser: response.data.currentUser,
-    }
-  } catch (error) {
-    return {
-      currentUser: null,
-    }
-  }
+  return data
 }
