@@ -17,6 +17,7 @@
     "@types/express": "^4.17.14",
     "@types/jsonwebtoken": "^8.5.9",
     "@types/mongoose": "^5.11.97",
+    "@bibblebabl/common": "workspace:*",
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.1",
     "cookie-session": "^2.0.0",
