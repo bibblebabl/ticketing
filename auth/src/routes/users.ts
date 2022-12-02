@@ -3,7 +3,7 @@ import { currentUserController } from '../controllers/current-user'
 import { signInController, signInValidator } from '../controllers/sign-in'
 import { signOutController } from '../controllers/sign-out'
 import { signUpController, signUpValidator } from '../controllers/sign-up'
-import { currentUser, requireAuth, validateRequest } from '../middlewares'
+import { currentUser, validateRequest } from '@bibblebabl/common'
 
 const usersRouter = express.Router()
 

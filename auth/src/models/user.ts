@@ -1,6 +1,6 @@
 import mongoose, { Document } from 'mongoose'
 import bcrypt from 'bcrypt'
-import { BadRequestError } from '../errors'
+import { BadRequestError } from '@bibblebabl/common'
 
 const HASH_ROUNDS = 10
 

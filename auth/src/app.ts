@@ -4,8 +4,7 @@ import { json } from 'body-parser'
 import cookieSession from 'cookie-session'
 
 import { usersRouter } from './routes/users'
-import { errorHandler } from './middlewares'
-import { NotFoundError } from './errors'
+import { errorHandler, NotFoundError } from '@bibblebabl/common'
 
 const app = express()
 

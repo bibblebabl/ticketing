@@ -2,7 +2,6 @@ import 'express-async-errors'
 
 import mongoose from 'mongoose'
 import { app } from './app'
-import { Foo } from '@bibblebabl/common'
 
 const config = {
   port: 3000,
