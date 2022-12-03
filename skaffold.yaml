@@ -3,7 +3,7 @@ kind: Config
 build:
   artifacts:
     - image: bibblebabl/auth
-      context: auth
+      context: apps/auth
       sync:
         manual:
           - src: src/**/*.ts
@@ -11,7 +11,7 @@ build:
       docker:
         dockerfile: Dockerfile
     - image: bibblebabl/client
-      context: client
+      context: apps/client
       sync:
         manual:
           - src: '**/*.ts'
