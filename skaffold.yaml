@@ -11,13 +11,13 @@ build:
       docker:
         dockerfile: apps/auth/Dockerfile
     - image: bibblebabl/client
-      context: .
+      context: apps/client
       sync:
         manual:
           - src: '**/*.ts'
             dest: .
       docker:
-        dockerfile: apps/client/Dockerfile
+        dockerfile: Dockerfile
   local:
     push: false
 manifests:
