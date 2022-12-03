@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "pnpm turbo dev",
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "prune": "turbo prune",
     "prettify": "prettier --write ."
   },
   "keywords": [],
