@@ -1,4 +1,9 @@
 import 'express-async-errors'
+import dotEnvSafe from 'dotenv-safe'
+
+dotEnvSafe.config({
+  example: './.env.example',
+})
 
 import mongoose from 'mongoose'
 import { app } from './app'
