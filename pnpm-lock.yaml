@@ -16,6 +16,7 @@ importers:
       '@types/bcrypt': ^5.0.0
       '@types/body-parser': ^1.19.2
       '@types/cookie-session': ^2.0.44
+      '@types/dotenv-safe': ^8.1.2
       '@types/express': ^4.17.14
       '@types/jest': ^29.2.2
       '@types/jsonwebtoken': ^8.5.9
@@ -24,6 +25,7 @@ importers:
       bcrypt: ^5.1.0
       body-parser: ^1.20.1
       cookie-session: ^2.0.0
+      dotenv-safe: ^8.2.0
       express: ^4.18.2
       express-async-errors: ^3.1.1
       express-validator: ^6.14.2
@@ -40,12 +42,14 @@ importers:
       '@types/bcrypt': 5.0.0
       '@types/body-parser': 1.19.2
       '@types/cookie-session': 2.0.44
+      '@types/dotenv-safe': 8.1.2
       '@types/express': 4.17.14
       '@types/jsonwebtoken': 8.5.9
       '@types/mongoose': 5.11.97
       bcrypt: 5.1.0
       body-parser: 1.20.1
       cookie-session: 2.0.0
+      dotenv-safe: 8.2.0
       express: 4.18.2
       express-async-errors: 3.1.1_express@4.18.2
       express-validator: 6.14.2
@@ -1748,6 +1752,12 @@ packages:
     resolution: {integrity: sha512-t73xJJrvdTjXrn4jLS9VSGRbz0nUY3cl2DMGDU48lKl+HR9dbbjW2A9r3g40VA++mQpy6uuHg33gy7du2BKpog==}
     dev: true
 
+  /@types/dotenv-safe/8.1.2:
+    resolution: {integrity: sha512-R/B/wIMda6lRE2P1H0vwSoJsV78IOkhccE4vIvmKZQNXOIjiU0QyJsUXwSotBxOPZFZ/oOnjCa3+kK5kVJwGyw==}
+    dependencies:
+      dotenv: 8.6.0
+    dev: false
+
   /@types/express-serve-static-core/4.17.31:
     resolution: {integrity: sha512-DxMhY+NAsTwMMFHBTtJFNp5qiHKJ7TeqOo23zVEM9alT1Ml27Q3xcTH0xwxn7Q0BbMcVEJOs/7aQtUWupUQN3Q==}
     dependencies:
@@ -2784,6 +2794,17 @@ packages:
     engines: {node: '>=6.0.0'}
     dependencies:
       esutils: 2.0.3
+    dev: false
+
+  /dotenv-safe/8.2.0:
+    resolution: {integrity: sha512-uWwWWdUQkSs5a3mySDB22UtNwyEYi0JtEQu+vDzIqr9OjbDdC2Ip13PnSpi/fctqlYmzkxCeabiyCAOROuAIaA==}
+    dependencies:
+      dotenv: 8.6.0
+    dev: false
+
+  /dotenv/8.6.0:
+    resolution: {integrity: sha512-IrPdXQsk2BbzvCBGBOTmmSH5SodmqZNt4ERAZDmW4CT+tL8VtvinqywuANaFu4bOMWki16nqf0e4oC0QIaDr/g==}
+    engines: {node: '>=10'}
     dev: false
 
   /dynamic-dedupe/0.3.0:
