@@ -169,9 +169,6 @@ importers:
       del-cli: 5.0.0
       typescript: 4.9.3
 
-  packages/tsconfig:
-    specifiers: {}
-
 packages:
 
   /@ampproject/remapping/2.2.0:
