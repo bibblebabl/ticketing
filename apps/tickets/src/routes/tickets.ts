@@ -1,3 +1,4 @@
+import { requireAuth } from '@bibblebabl/common'
 import express from 'express'
 // import { currentUserController } from '../controllers/current-user'
 // import { signInController, signInValidator } from '../controllers/sign-in'
@@ -7,9 +8,9 @@ import express from 'express'
 
 const ticketsRouter = express.Router()
 
-ticketsRouter.get('/', (req, res) => {})
+// ticketsRouter.get('/', (req, res) => {})
 
-ticketsRouter.post('/', (req, res) => {
+ticketsRouter.post('/', requireAuth, (req, res) => {
   res.status(200).send({})
 })
 
