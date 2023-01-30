@@ -2,8 +2,8 @@ import express from 'express'
 import 'express-async-errors'
 import { json } from 'body-parser'
 import cookieSession from 'cookie-session'
-
 import { errorHandler, NotFoundError } from '@bibblebabl/common'
+import { ticketsRouter } from './routes/tickets'
 
 const app = express()
 
@@ -15,6 +15,8 @@ app.use(
     secure: process.env.NODE_ENV !== 'test',
   }),
 )
+
+app.use('/api/tickets', ticketsRouter)
 
 app.all('*', async () => {
   throw new NotFoundError()
