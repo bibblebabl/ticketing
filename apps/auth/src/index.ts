@@ -1,17 +1,12 @@
 import 'express-async-errors'
-import dotEnvSafe from 'dotenv-safe'
-
-dotEnvSafe.config({
-  example: './.env.example',
-})
-
+import { cleanEnv, str } from 'envalid'
 import mongoose from 'mongoose'
 import { app } from './app'
 
-const config = {
-  port: 3000,
-  mongoDbUri: 'mongodb://auth-mongo-srv:27017/auth',
-}
+const env = cleanEnv(process.env, {
+  JWT_KEY: str(),
+  MONGO_URI: str(),
+})
 
 const start = async () => {
   if (!process.env.JWT_KEY) {
@@ -19,14 +14,14 @@ const start = async () => {
   }
 
   try {
-    await mongoose.connect(config.mongoDbUri)
+    await mongoose.connect(env.MONGO_URI)
     console.log('Connected to Auth MongoDB')
   } catch (error) {
     console.error(error)
   }
 
-  app.listen(config.port, () => {
-    console.log(`Auth Server listening on ${config.port}`)
+  app.listen(3000, () => {
+    console.log(`Auth Server listening on ${3000}`)
   })
 }
 
