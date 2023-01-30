@@ -1,4 +1,5 @@
 import request from 'supertest'
+import { signIn } from '../../../test/helpers'
 import { app } from '../../app'
 
 it('has a route handler listening to /api/tickets for post requests', async () => {
@@ -13,7 +14,7 @@ it('can only be accessed if the user is signed in', async () => {
 })
 
 it('returns a status other than 401 if the user is signed in', async () => {
-  const response = await request(app).post('/api/tickets').send({})
+  const response = await request(app).post('/api/tickets').set('Cookie', signIn()).send({})
 
   expect(response.status).not.toEqual(401)
 })

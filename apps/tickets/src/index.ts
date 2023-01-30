@@ -1,12 +1,7 @@
 import 'express-async-errors'
-import { cleanEnv, str } from 'envalid'
 import mongoose from 'mongoose'
 import { app } from './app'
-
-const env = cleanEnv(process.env, {
-  JWT_KEY: str(),
-  MONGO_URI: str(),
-})
+import { env } from './config'
 
 const start = async () => {
   try {

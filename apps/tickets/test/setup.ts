@@ -3,10 +3,9 @@ import mongoose from 'mongoose'
 
 let mongo: any
 
-const TEST_JWT_KEY = 'jtw-token'
-
 beforeAll(async () => {
-  process.env.JWT_KEY = TEST_JWT_KEY
+  process.env.JWT_KEY = 'asdfasdf'
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
 
   mongo = await MongoMemoryServer.create()
   const mongoUri = mongo.getUri()

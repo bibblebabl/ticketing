@@ -6,8 +6,7 @@ import { currentUser, errorHandler, NotFoundError } from '@bibblebabl/common'
 import { ticketsRouter } from './routes/tickets'
 
 const app = express()
-
-app.set('trust proxy', true) // for ingress-nginx
+app.set('trust proxy', true)
 app.use(json())
 app.use(
   cookieSession({
@@ -15,7 +14,6 @@ app.use(
     secure: process.env.NODE_ENV !== 'test',
   }),
 )
-
 app.use(currentUser)
 
 app.use('/api/tickets', ticketsRouter)
