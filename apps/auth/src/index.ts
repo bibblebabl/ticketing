@@ -20,7 +20,7 @@ const start = async () => {
 
   try {
     await mongoose.connect(config.mongoDbUri)
-    console.log('Connected to MongoDB')
+    console.log('Connected to Auth MongoDB')
   } catch (error) {
     console.error(error)
   }
