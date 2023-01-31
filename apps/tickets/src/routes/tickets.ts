@@ -1,6 +1,7 @@
 import { requireAuth, validateRequest } from '@bibblebabl/common'
 import { body } from 'express-validator'
 import express, { Response, Request } from 'express'
+import { Ticket } from '../models/ticket'
 
 const ticketsRouter = express.Router()
 
@@ -12,8 +13,18 @@ ticketsRouter.post(
     body('price').isFloat({ gt: 0 }).withMessage('Price must be greater than 0'),
   ],
   validateRequest,
-  (req: Request, res: Response) => {
-    res.status(200).send({})
+  async (req: Request, res: Response) => {
+    const { title, price } = req.body
+
+    const ticket = new Ticket({
+      title,
+      price,
+      userId: req.currentUser!.id,
+    })
+
+    await ticket.save()
+
+    res.status(201).send(ticket)
   },
 )
 
