@@ -1,21 +1,12 @@
 import 'express-async-errors'
-import { cleanEnv, str } from 'envalid'
 import mongoose from 'mongoose'
 import { app } from './app'
-
-const env = cleanEnv(process.env, {
-  JWT_KEY: str(),
-  MONGO_URI: str(),
-})
+import { env } from './config'
 
 const start = async () => {
-  if (!process.env.JWT_KEY) {
-    throw new Error('process.env.JWT_KEY must be defined')
-  }
-
   try {
     await mongoose.connect(env.MONGO_URI)
-    console.log('Connected to Auth MongoDB')
+    console.log('Connected to Tickets MongoDB')
   } catch (error) {
     console.error(error)
   }
