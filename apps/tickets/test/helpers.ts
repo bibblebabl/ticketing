@@ -1,10 +1,14 @@
 import mongoose from 'mongoose'
 import jwt from 'jsonwebtoken'
 
+export const createMongooseId = () => {
+  return new mongoose.Types.ObjectId().toHexString()
+}
+
 export const signIn = () => {
   // Build a JWT payload.  { id, email }
   const payload = {
-    id: new mongoose.Types.ObjectId().toHexString(),
+    id: createMongooseId(),
     email: 'test@test.com',
   }
 
@@ -22,8 +26,4 @@ export const signIn = () => {
 
   // return a string thats the cookie with the encoded data
   return [`session=${base64}`]
-}
-
-export const createMongooseId = () => {
-  return new mongoose.Types.ObjectId().toHexString()
 }
