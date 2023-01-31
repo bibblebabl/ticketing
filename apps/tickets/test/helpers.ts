@@ -23,3 +23,7 @@ export const signIn = () => {
   // return a string thats the cookie with the encoded data
   return [`session=${base64}`]
 }
+
+export const createMongooseId = () => {
+  return new mongoose.Types.ObjectId().toHexString()
+}
