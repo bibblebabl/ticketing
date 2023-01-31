@@ -1,31 +1,12 @@
 import { requireAuth, validateRequest } from '@bibblebabl/common'
-import { body } from 'express-validator'
-import express, { Response, Request } from 'express'
-import { Ticket } from '../models/ticket'
+import express from 'express'
+import { newTicketController, ticketValidator } from '../controllers/new-ticket'
+import { showTicketController } from '../controllers/show-ticket'
 
 const ticketsRouter = express.Router()
 
-ticketsRouter.post(
-  '/',
-  requireAuth,
-  [
-    body('title').not().isEmpty().withMessage('Title is required'),
-    body('price').isFloat({ gt: 0 }).withMessage('Price must be greater than 0'),
-  ],
-  validateRequest,
-  async (req: Request, res: Response) => {
-    const { title, price } = req.body
+ticketsRouter.post('/', requireAuth, ticketValidator, validateRequest, newTicketController)
 
-    const ticket = new Ticket({
-      title,
-      price,
-      userId: req.currentUser!.id,
-    })
-
-    await ticket.save()
-
-    res.status(201).send(ticket)
-  },
-)
+ticketsRouter.get('/:id', showTicketController)
 
 export { ticketsRouter }
