@@ -12,6 +12,11 @@ const stan = nats.connect('ticketing', clientID, {
 stan.on('connect', () => {
   console.log('Listener connected to NATS with client ID: ', clientID)
 
+  stan.on('close', () => {
+    console.log('NATS connection closed!')
+    process.exit()
+  })
+
   const options = stan.subscriptionOptions().setManualAckMode(true)
   // .setManualAckMode(true).setMaxInFlight(1).setDeliverAllAvailable().setDurableName('orders-service')
 
@@ -27,3 +32,6 @@ stan.on('connect', () => {
     msg.ack()
   })
 })
+
+process.on('SIGINT', () => stan.close())
+process.on('SIGTERM', () => stan.close())
