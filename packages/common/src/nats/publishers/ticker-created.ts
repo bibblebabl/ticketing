@@ -1,6 +1,6 @@
-import { Subjects } from '../listeners/subjects'
+import { Subjects } from '../subjects'
 import { TicketCreatedEvent } from '../listeners/ticket-created'
-import { Publisher } from './base'
+import { Publisher } from './base-publisher'
 
 export class TicketCreatedPublisher extends Publisher<TicketCreatedEvent> {
   readonly subject = Subjects.TicketCreated

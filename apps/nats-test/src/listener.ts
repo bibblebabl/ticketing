@@ -1,6 +1,6 @@
 import nats from 'node-nats-streaming'
 import { randomBytes } from 'crypto'
-import { TicketCreatedListener } from './listeners/ticket-created'
+import { TicketCreatedListener } from '@bibblebabl/common'
 
 console.clear()
 

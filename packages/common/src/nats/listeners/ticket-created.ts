@@ -1,6 +1,6 @@
 import { Message } from 'node-nats-streaming'
-import { Listener } from './base'
-import { Subjects } from './subjects'
+import { Listener } from './base-listener'
+import { Subjects } from '../subjects'
 
 export interface TicketCreatedEvent {
   subject: Subjects.TicketCreated
@@ -8,6 +8,7 @@ export interface TicketCreatedEvent {
     id: string
     title: string
     price: number
+    userId: string
   }
 }
 

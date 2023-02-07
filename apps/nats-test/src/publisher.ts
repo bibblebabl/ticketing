@@ -1,6 +1,5 @@
 import nats from 'node-nats-streaming'
-import { Subjects } from './listeners/subjects'
-import { TicketCreatedPublisher } from './publishers/ticker-created'
+import { TicketCreatedPublisher } from '@bibblebabl/common'
 
 console.clear()
 const stan = nats.connect('ticketing', 'abc', {
@@ -16,5 +15,6 @@ stan.on('connect', () => {
     id: '123',
     title: 'concert',
     price: 20,
+    userId: '1234',
   })
 })
