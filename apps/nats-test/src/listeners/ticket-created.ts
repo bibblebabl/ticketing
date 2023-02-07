@@ -12,7 +12,7 @@ export interface TicketCreatedEvent {
 }
 
 export class TicketCreatedListener extends Listener<TicketCreatedEvent> {
-  subject = Subjects.TicketCreated
+  subject: Subjects.TicketCreated = Subjects.TicketCreated
   queueGroupName = 'payments-service'
 
   onMessage(data: TicketCreatedEvent['data'], msg: Message) {
