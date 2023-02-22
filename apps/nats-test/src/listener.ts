@@ -1,5 +1,6 @@
-import nats, { Message } from 'node-nats-streaming'
+import nats from 'node-nats-streaming'
 import { randomBytes } from 'crypto'
+import { TicketCreatedListener } from '@bibblebabl/common'
 
 console.clear()
 
@@ -17,25 +18,7 @@ stan.on('connect', () => {
     process.exit()
   })
 
-  const options = stan
-    .subscriptionOptions()
-    .setDeliverAllAvailable()
-    .setDurableName('accounting-service')
-    .setManualAckMode(true)
-
-  // .setManualAckMode(true).setMaxInFlight(1).setDeliverAllAvailable().setDurableName('orders-service')
-
-  const subscription = stan.subscribe('ticket:created', 'queue-group-name', options)
-
-  subscription.on('message', (msg: Message) => {
-    const data = msg.getData()
-
-    if (typeof data === 'string') {
-      console.log(`Received event #${msg.getSequence()}, with data: ${data}`)
-    }
-
-    msg.ack()
-  })
+  new TicketCreatedListener(stan).listen()
 })
 
 process.on('SIGINT', () => stan.close())
