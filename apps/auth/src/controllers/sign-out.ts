@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 
 export const signOutController = (req: Request, res: Response) => {
-  req.session = null
+  req.session = {}
 
   res.send({})
 }
