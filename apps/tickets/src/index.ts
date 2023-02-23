@@ -6,7 +6,7 @@ import { natsWrapper } from './nats-wrapper'
 
 const start = async () => {
   try {
-    await natsWrapper.connect('ticketing', 'tickets', env.NATS_URI)
+    await natsWrapper.connect(env.NATS_CLUSTER_ID, env.NATS_CLIENT_ID, env.NATS_URL)
 
     natsWrapper.client.on('close', () => {
       console.log('NATS connection closed!')
