@@ -10,14 +10,6 @@ build:
             dest: .
       docker:
         dockerfile: apps/auth/Dockerfile
-    - image: bibblebabl/tickets
-      context: .
-      sync:
-        manual:
-          - src: src/**/*.ts
-            dest: .
-      docker:
-        dockerfile: apps/tickets/Dockerfile
     - image: bibblebabl/client
       context: .
       sync:
@@ -26,6 +18,22 @@ build:
             dest: .
       docker:
         dockerfile: apps/client/Dockerfile
+    - image: bibblebabl/tickets
+      context: .
+      sync:
+        manual:
+          - src: src/**/*.ts
+            dest: .
+      docker:
+        dockerfile: apps/tickets/Dockerfile
+    - image: bibblebabl/orders
+      context: .
+      sync:
+        manual:
+          - src: src/**/*.ts
+            dest: .
+      docker:
+        dockerfile: apps/orders/Dockerfile
   local:
     push: false
 manifests:
