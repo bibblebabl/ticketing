@@ -1,8 +1,11 @@
+import { OrderStatus } from '@bibblebabl/common'
 import { Schema, model } from 'mongoose'
+import { Order } from './order'
 
 export interface ITicket {
   title: string
   price: number
+  isReserved(): Promise<boolean>
 }
 
 const ticketSchema = new Schema<ITicket>(
@@ -22,6 +25,18 @@ const ticketSchema = new Schema<ITicket>(
       transform(doc, ret) {
         ret.id = ret._id
         delete ret._id
+      },
+    },
+    methods: {
+      isReserved: async function () {
+        const existingOrder = await Order.findOne({
+          ticket: this,
+          status: {
+            $in: [OrderStatus.Created, OrderStatus.AwaitingPayment, OrderStatus.Complete],
+          },
+        })
+
+        return Boolean(existingOrder)
       },
     },
   },
