@@ -1,6 +1,8 @@
 import { NotAuthorizedError, NotFoundError, OrderStatus } from '@bibblebabl/common'
 import { Response, Request } from 'express'
+import { OrderCancelledPublisher } from '../events/publishers/order-cancelled'
 import { Order } from '../models/order'
+import { natsWrapper } from '../nats-wrapper'
 
 export const deleteOrderController = async (req: Request, res: Response) => {
   const { orderId } = req.params
@@ -19,7 +21,12 @@ export const deleteOrderController = async (req: Request, res: Response) => {
 
   await order.save()
 
-  // await order.delete()
+  new OrderCancelledPublisher(natsWrapper.client).publish({
+    id: order.id,
+    ticket: {
+      id: order.ticket.id,
+    },
+  })
 
   res.status(204).send(order)
 }

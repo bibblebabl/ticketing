@@ -1,5 +1,4 @@
 import { model, Schema, Types } from 'mongoose'
-// import bcrypt from 'bcrypt'
 import { OrderStatus } from '@bibblebabl/common'
 import { ITicket } from './ticket'
 

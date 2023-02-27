@@ -1,8 +1,9 @@
 import { OrderStatus } from '@bibblebabl/common'
-import { Schema, model } from 'mongoose'
+import { Schema, model, Types } from 'mongoose'
 import { Order } from './order'
 
 export interface ITicket {
+  id: string
   title: string
   price: number
   isReserved(): Promise<boolean>
