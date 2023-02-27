@@ -1,9 +1,11 @@
+import mongoose from 'mongoose'
+import { body } from 'express-validator'
 import { BadRequestError, NotFoundError, OrderStatus } from '@bibblebabl/common'
 import { Response, Request } from 'express'
-import { body } from 'express-validator'
-import mongoose from 'mongoose'
+import { OrderCreatedPublisher } from '../events/publishers/order-created'
 import { Order } from '../models/order'
 import { Ticket } from '../models/ticket'
+import { natsWrapper } from '../nats-wrapper'
 
 const EXPIRATION_WINDOW_SECONDS = 15 * 60 * 1000 // 15 minutes
 
@@ -43,6 +45,17 @@ export const createOrderController = async (req: Request, res: Response) => {
   })
 
   await order.save()
+
+  new OrderCreatedPublisher(natsWrapper.client).publish({
+    id: order.id,
+    status: order.status,
+    userId: order.userId,
+    expiresAt: order.expiresAt.toISOString(),
+    ticket: {
+      id: ticket.id,
+      price: ticket.price,
+    },
+  })
 
   res.status(201).send(order)
 }

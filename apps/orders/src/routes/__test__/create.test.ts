@@ -4,6 +4,7 @@ import { apIRoute, app } from '../../app'
 import { createMongooseId, signIn } from '../../../test/helpers'
 import { Ticket } from '../../models/ticket'
 import { Order } from '../../models/order'
+import { natsWrapper } from '../../nats-wrapper'
 
 it('returns an error if the ticket does not exist', async () => {
   const ticketId = createMongooseId()
@@ -54,4 +55,19 @@ it('reserves a ticket', async () => {
   expect(order.body.ticket.id).toEqual(ticket.id)
 })
 
-it.todo('emits an order created event')
+it('emits an order created event', async () => {
+  const ticket = new Ticket({
+    title: 'concert',
+    price: 20,
+  })
+
+  await ticket.save()
+
+  await request(app)
+    .post(apIRoute)
+    .set('Cookie', signIn())
+    .send({ ticketId: ticket.id })
+    .expect(201)
+
+  expect(natsWrapper.client.publish).toHaveBeenCalled()
+})

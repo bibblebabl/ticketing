@@ -1,5 +1,5 @@
 import nats from 'node-nats-streaming'
-import { TicketCreatedPublisher } from '@bibblebabl/common'
+import { TicketCreatedPublisher } from './ticker-created-publisher'
 
 console.clear()
 const stan = nats.connect('ticketing', 'abc', {
