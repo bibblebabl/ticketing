@@ -7,7 +7,7 @@ import { ordersRouter } from './routes'
 
 const app = express()
 
-const apIRoute = '/api/orders'
+export const apIRoute = '/api/orders'
 
 app.set('trust proxy', true)
 app.use(json())
