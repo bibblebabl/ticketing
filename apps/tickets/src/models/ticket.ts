@@ -1,6 +1,6 @@
 import mongoose, { Document, Schema, model } from 'mongoose'
 
-interface ITicket extends Document {
+export interface ITicket extends Document {
   title: string
   price: number
   userId: string

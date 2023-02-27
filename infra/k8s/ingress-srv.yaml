@@ -24,7 +24,14 @@ spec:
                 name: tickets-srv
                 port:
                   number: 3000
-          - path: /?(.*)
+          - path: /api/orders/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: orders-srv
+                port:
+                  number: 3000
+          - path: /?(.*) # This is the catch all route. It will match any route that is not matched by the above routes
             pathType: Prefix
             backend:
               service:
