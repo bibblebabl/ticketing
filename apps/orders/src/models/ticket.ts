@@ -1,9 +1,8 @@
-import mongoose, { Document, Schema, model } from 'mongoose'
+import { Schema, model } from 'mongoose'
 
-export interface ITicket extends Document {
+export interface ITicket {
   title: string
   price: number
-  userId: string
 }
 
 const ticketSchema = new Schema<ITicket>(
@@ -15,10 +14,7 @@ const ticketSchema = new Schema<ITicket>(
     price: {
       type: Number,
       required: true,
-    },
-    userId: {
-      type: String,
-      required: true,
+      min: 0,
     },
   },
   {
