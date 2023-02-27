@@ -11,8 +11,8 @@ ordersRouter.get('/', requireAuth, getOrdersController)
 
 ordersRouter.post('/', requireAuth, ticketValidator, createOrderController)
 
-ordersRouter.delete('/:orderId', deleteOrderController)
+ordersRouter.get('/:orderId', requireAuth, getOrderController)
 
-ordersRouter.get('/:orderId', getOrderController)
+ordersRouter.delete('/:orderId', deleteOrderController)
 
 export { ordersRouter }
