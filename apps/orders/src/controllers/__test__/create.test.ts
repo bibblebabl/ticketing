@@ -45,9 +45,11 @@ it('reserves a ticket', async () => {
 
   await ticket.save()
 
-  await request(app)
+  const order = await request(app)
     .post(apIRoute)
     .set('Cookie', signIn())
     .send({ ticketId: ticket.id })
     .expect(201)
+
+  expect(order.body.ticket.id).toEqual(ticket.id)
 })
