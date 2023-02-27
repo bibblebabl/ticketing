@@ -1,4 +1,4 @@
-import { NotAuthorizedError, NotFoundError } from '@bibblebabl/common'
+import { NotAuthorizedError, NotFoundError, OrderStatus } from '@bibblebabl/common'
 import { Response, Request } from 'express'
 import { Order } from '../models/order'
 
@@ -15,7 +15,11 @@ export const deleteOrderController = async (req: Request, res: Response) => {
     throw new NotAuthorizedError()
   }
 
-  await order.delete()
+  order.status = OrderStatus.Cancelled // instead of deleting the order, we mark it as cancelled
+
+  await order.save()
+
+  // await order.delete()
 
   res.status(204).send(order)
 }
