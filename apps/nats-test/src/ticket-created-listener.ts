@@ -1,16 +1,5 @@
+import { Listener, Subjects, TicketCreatedEvent } from '@bibblebabl/common'
 import { Message } from 'node-nats-streaming'
-import { Listener } from './base-listener'
-import { Subjects } from '../subjects'
-
-export interface TicketCreatedEvent {
-  subject: Subjects.TicketCreated
-  data: {
-    id: string
-    title: string
-    price: number
-    userId: string
-  }
-}
 
 export class TicketCreatedListener extends Listener<TicketCreatedEvent> {
   readonly subject = Subjects.TicketCreated
