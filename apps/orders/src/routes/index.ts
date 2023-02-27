@@ -7,7 +7,7 @@ import { getOrdersController } from '../controllers/get-all'
 
 const ordersRouter = express.Router()
 
-ordersRouter.get('/', getOrdersController)
+ordersRouter.get('/', requireAuth, getOrdersController)
 
 ordersRouter.post('/', requireAuth, ticketValidator, createOrderController)
 

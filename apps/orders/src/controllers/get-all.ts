@@ -1,11 +1,10 @@
 import { Response, Request } from 'express'
+import { Order } from '../models/order'
 
 export const getOrdersController = async (req: Request, res: Response) => {
-  // const tickets = await Ticket.find({})
+  const orders = await Order.find({
+    userId: req.currentUser!.id,
+  }).populate('ticket')
 
-  // if (!tickets) {
-  //   throw new NotFoundError()
-  // }
-
-  res.send({})
+  res.send(orders)
 }
