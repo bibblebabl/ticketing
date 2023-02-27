@@ -53,3 +53,5 @@ it('reserves a ticket', async () => {
 
   expect(order.body.ticket.id).toEqual(ticket.id)
 })
+
+it.todo('emits an order created event')
