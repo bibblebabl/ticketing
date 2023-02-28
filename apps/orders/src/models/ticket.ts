@@ -39,6 +39,15 @@ const ticketSchema = new Schema<ITicket>(
 
         return Boolean(existingOrder)
       },
+      statics: {
+        build: (attrs: ITicket) => {
+          return new Ticket({
+            _id: attrs.id,
+            title: attrs.title,
+            price: attrs.price,
+          })
+        },
+      },
     },
   },
 )
