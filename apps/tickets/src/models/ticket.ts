@@ -1,9 +1,11 @@
 import mongoose, { Document, Schema, model } from 'mongoose'
+import { updateIfCurrentPlugin } from 'mongoose-update-if-current'
 
 export interface ITicket extends Document {
   title: string
   price: number
   userId: string
+  version: number
 }
 
 const ticketSchema = new Schema<ITicket>(
@@ -30,6 +32,9 @@ const ticketSchema = new Schema<ITicket>(
     },
   },
 )
+
+ticketSchema.set('versionKey', 'version')
+ticketSchema.plugin(updateIfCurrentPlugin)
 
 const Ticket = model<ITicket>('Ticket', ticketSchema)
 
