@@ -1,11 +1,14 @@
 import { OrderStatus } from '@bibblebabl/common'
 import { Schema, model, Types } from 'mongoose'
+import { updateIfCurrentPlugin } from 'mongoose-update-if-current'
+
 import { Order } from './order'
 
 export interface ITicket {
   id: string
   title: string
   price: number
+  version: number
   isReserved(): Promise<boolean>
 }
 
@@ -51,6 +54,9 @@ const ticketSchema = new Schema<ITicket>(
     },
   },
 )
+
+ticketSchema.set('versionKey', 'version')
+ticketSchema.plugin(updateIfCurrentPlugin)
 
 const Ticket = model<ITicket>('Ticket', ticketSchema)
 
