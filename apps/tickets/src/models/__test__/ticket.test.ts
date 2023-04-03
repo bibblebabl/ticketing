@@ -2,7 +2,7 @@ import { Ticket } from '../ticket'
 
 it('implements optimistic concurrency control', async () => {
   // Create an instance of a ticket
-  const ticket = new Ticket({
+  const ticket = Ticket.build({
     title: 'concert',
     price: 5,
     userId: '123',
@@ -33,7 +33,7 @@ it('implements optimistic concurrency control', async () => {
 })
 
 it('increments the version number on multiple saves', async () => {
-  const ticket = new Ticket({
+  const ticket = Ticket.build({
     title: 'concert',
     price: 20,
     userId: '123',

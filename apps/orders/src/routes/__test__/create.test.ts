@@ -14,7 +14,7 @@ it('returns an error if the ticket does not exist', async () => {
 it('returns an error if the ticket is already reserved', async () => {
   const ticketId = createMongooseId()
 
-  const ticket = new Ticket({
+  const ticket = Ticket.build({
     id: ticketId,
     title: 'concert',
     price: 20,
@@ -39,7 +39,8 @@ it('returns an error if the ticket is already reserved', async () => {
 })
 
 it('reserves a ticket', async () => {
-  const ticket = new Ticket({
+  const ticket = Ticket.build({
+    id: createMongooseId(),
     title: 'concert',
     price: 20,
   })
@@ -56,7 +57,8 @@ it('reserves a ticket', async () => {
 })
 
 it('emits an order created event', async () => {
-  const ticket = new Ticket({
+  const ticket = Ticket.build({
+    id: createMongooseId(),
     title: 'concert',
     price: 20,
   })
