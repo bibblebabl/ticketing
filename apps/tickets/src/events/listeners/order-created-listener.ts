@@ -2,10 +2,11 @@ import { Listener, OrderCreatedEvent, Subjects } from '@bibblebabl/common'
 import { Message } from 'node-nats-streaming'
 import { Ticket } from '../../models/ticket'
 import { TicketUpdatedPublisher } from '../publishers/ticket-updated-publisher'
+import { QUEUE_GROUP_NAME } from '../../config'
 
 export class OrderCreatedListener extends Listener<OrderCreatedEvent> {
-  subject: Subjects.OrderCreated = Subjects.OrderCreated
-  queueGroupName = 'tickets-service'
+  readonly subject = Subjects.OrderCreated
+  queueGroupName = QUEUE_GROUP_NAME
 
   async onMessage(data: OrderCreatedEvent['data'], msg: Message) {
     // Find the ticket that the order is reserving
