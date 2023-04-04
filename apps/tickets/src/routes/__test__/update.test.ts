@@ -1,10 +1,10 @@
 import request from 'supertest'
-import { createMongooseId, signIn } from '../../../test/helpers'
+import { generateMongooseId, signIn } from '../../../test/helpers'
 import { app } from '../../app'
 import { natsWrapper } from '../../nats-wrapper'
 
 it('returns a 404 if the provided id does not exist', async () => {
-  const id = createMongooseId()
+  const id = generateMongooseId()
 
   await request(app)
     .put(`/api/tickets/${id}`)
@@ -17,7 +17,7 @@ it('returns a 404 if the provided id does not exist', async () => {
 })
 
 it('returns a 401 if the user is not authenticated', async () => {
-  const id = createMongooseId()
+  const id = generateMongooseId()
 
   await request(app)
     .put(`/api/tickets/${id}`)

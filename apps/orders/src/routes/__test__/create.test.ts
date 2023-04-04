@@ -1,18 +1,18 @@
 import { OrderStatus } from '@bibblebabl/common'
 import request from 'supertest'
 import { apIRoute, app } from '../../app'
-import { createMongooseId, signIn } from '../../../test/helpers'
+import { generateMongooseId, signIn } from '../../../test/helpers'
 import { Ticket } from '../../models/ticket'
 import { Order } from '../../models/order'
 import { natsWrapper } from '../../nats-wrapper'
 
 it('returns an error if the ticket does not exist', async () => {
-  const ticketId = createMongooseId()
+  const ticketId = generateMongooseId()
   await request(app).post(apIRoute).set('Cookie', signIn()).send({ ticketId }).expect(404)
 })
 
 it('returns an error if the ticket is already reserved', async () => {
-  const ticketId = createMongooseId()
+  const ticketId = generateMongooseId()
 
   const ticket = Ticket.build({
     id: ticketId,
@@ -40,7 +40,7 @@ it('returns an error if the ticket is already reserved', async () => {
 
 it('reserves a ticket', async () => {
   const ticket = Ticket.build({
-    id: createMongooseId(),
+    id: generateMongooseId(),
     title: 'concert',
     price: 20,
   })
@@ -58,7 +58,7 @@ it('reserves a ticket', async () => {
 
 it('emits an order created event', async () => {
   const ticket = Ticket.build({
-    id: createMongooseId(),
+    id: generateMongooseId(),
     title: 'concert',
     price: 20,
   })

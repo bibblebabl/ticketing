@@ -1,5 +1,5 @@
 import { OrderCreatedEvent, OrderStatus } from '@bibblebabl/common'
-import { createMongooseId } from '../../../../test/helpers'
+import { generateMongooseId } from '../../../../test/helpers'
 import { Ticket } from '../../../models/ticket'
 import { natsWrapper } from '../../../nats-wrapper'
 import { OrderCreatedListener } from '../order-created-listener'
@@ -18,7 +18,7 @@ const setup = async () => {
 
   // Create the fake data event
   const data: OrderCreatedEvent['data'] = {
-    id: createMongooseId(),
+    id: generateMongooseId(),
     version: 0,
     status: OrderStatus.Created,
     userId: 'asdf',

@@ -1,14 +1,14 @@
 import mongoose from 'mongoose'
 import jwt from 'jsonwebtoken'
 
-export const createMongooseId = () => {
+export const generateMongooseId = () => {
   return new mongoose.Types.ObjectId().toHexString()
 }
 
 export const signIn = () => {
   // Build a JWT payload.  { id, email }
   const payload = {
-    id: createMongooseId(),
+    id: generateMongooseId(),
     email: 'test@test.com',
   }
 

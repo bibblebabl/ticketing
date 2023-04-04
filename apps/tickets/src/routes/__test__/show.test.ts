@@ -1,10 +1,10 @@
 import mongoose from 'mongoose'
 import request from 'supertest'
-import { createMongooseId, signIn } from '../../../test/helpers'
+import { generateMongooseId, signIn } from '../../../test/helpers'
 import { app } from '../../app'
 
 it('returns a 404 if the ticket is not found', async () => {
-  const id = createMongooseId()
+  const id = generateMongooseId()
 
   await request(app).get(`/api/tickets/${id}`).send().expect(404)
 })

@@ -1,6 +1,6 @@
 import { OrderStatus } from '@bibblebabl/common'
 import request from 'supertest'
-import { createMongooseId, signIn } from '../../../test/helpers'
+import { generateMongooseId, signIn } from '../../../test/helpers'
 import { apIRoute, app } from '../../app'
 import { Order } from '../../models/order'
 import { Ticket } from '../../models/ticket'
@@ -8,7 +8,7 @@ import { natsWrapper } from '../../nats-wrapper'
 
 it('marks an order as cancelled', async () => {
   const ticket = Ticket.build({
-    id: createMongooseId(),
+    id: generateMongooseId(),
     title: 'concert',
     price: 20,
   })
@@ -34,7 +34,7 @@ it('marks an order as cancelled', async () => {
 
 it('emits a order cancelled event', async () => {
   const ticket = Ticket.build({
-    id: createMongooseId(),
+    id: generateMongooseId(),
     title: 'concert',
     price: 20,
   })

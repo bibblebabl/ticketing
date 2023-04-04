@@ -1,5 +1,5 @@
 import { TicketUpdatedEvent } from '@bibblebabl/common'
-import { createMongooseId } from '../../../../test/helpers'
+import { generateMongooseId } from '../../../../test/helpers'
 import { Ticket } from '../../../models/ticket'
 import { natsWrapper } from '../../../nats-wrapper'
 import { TicketUpdatedListener } from '../ticket-updated-listener'
@@ -8,7 +8,7 @@ const setup = async () => {
   const listener = new TicketUpdatedListener(natsWrapper.client)
 
   const ticket = Ticket.build({
-    id: createMongooseId(),
+    id: generateMongooseId(),
     title: 'concert',
     price: 20,
   })
@@ -20,7 +20,7 @@ const setup = async () => {
     version: ticket.version + 1,
     title: 'new concert',
     price: 999,
-    userId: createMongooseId(),
+    userId: generateMongooseId(),
   }
 
   // @ts-ignore
