@@ -1,8 +1,8 @@
 import { Listener, OrderCancelledEvent, Subjects } from '@bibblebabl/common'
-import { QUEUE_GROUP_NAME } from '../../config'
 import { Message } from 'node-nats-streaming'
 import { Ticket } from '../../models/ticket'
 import { TicketUpdatedPublisher } from '../publishers/ticket-updated-publisher'
+import { QUEUE_GROUP_NAME } from '.'
 
 export class OrderCancelledListener extends Listener<OrderCancelledEvent> {
   readonly subject = Subjects.OrderCancelled

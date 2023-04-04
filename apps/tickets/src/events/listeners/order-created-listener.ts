@@ -2,7 +2,7 @@ import { Listener, OrderCreatedEvent, Subjects } from '@bibblebabl/common'
 import { Message } from 'node-nats-streaming'
 import { Ticket } from '../../models/ticket'
 import { TicketUpdatedPublisher } from '../publishers/ticket-updated-publisher'
-import { QUEUE_GROUP_NAME } from '../../config'
+import { QUEUE_GROUP_NAME } from '.'
 
 export class OrderCreatedListener extends Listener<OrderCreatedEvent> {
   readonly subject = Subjects.OrderCreated
