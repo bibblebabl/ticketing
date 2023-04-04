@@ -1,4 +1,4 @@
-import { NotAuthorizedError, NotFoundError } from '@bibblebabl/common'
+import { BadRequestError, NotAuthorizedError, NotFoundError } from '@bibblebabl/common'
 import { Response, Request } from 'express'
 import { TicketUpdatedPublisher } from '../events/publishers/ticket-updated-publisher'
 import { Ticket } from '../models/ticket'
@@ -9,6 +9,10 @@ export const updateTicketController = async (req: Request, res: Response) => {
 
   if (!ticket) {
     throw new NotFoundError()
+  }
+
+  if (ticket.orderId) {
+    throw new BadRequestError('Cannot edit a reserved ticket')
   }
 
   if (ticket.userId !== req.currentUser?.id) {
@@ -25,6 +29,7 @@ export const updateTicketController = async (req: Request, res: Response) => {
     title: ticket.title,
     price: ticket.price,
     userId: ticket.userId,
+    version: ticket.version,
   })
 
   await ticket.save()

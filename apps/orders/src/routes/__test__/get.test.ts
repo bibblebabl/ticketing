@@ -1,10 +1,11 @@
 import request from 'supertest'
-import { signIn } from '../../../test/helpers'
+import { generateMongooseId, signIn } from '../../../test/helpers'
 import { apIRoute, app } from '../../app'
 import { Ticket } from '../../models/ticket'
 
 it('fetches the order', async () => {
-  const ticket = new Ticket({
+  const ticket = Ticket.build({
+    id: generateMongooseId(),
     title: 'concert',
     price: 20,
   })
@@ -28,7 +29,8 @@ it('fetches the order', async () => {
 })
 
 it('returns an error if one user tries to fetch another users order', async () => {
-  const ticket = new Ticket({
+  const ticket = Ticket.build({
+    id: generateMongooseId(),
     title: 'concert',
     price: 20,
   })
