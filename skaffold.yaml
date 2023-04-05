@@ -41,7 +41,7 @@ build:
           - src: src/**/*.ts
             dest: .
       docker:
-        dockerfile: apps/orders/Dockerfile
+        dockerfile: apps/expiration/Dockerfile
   local:
     push: false
 manifests:
