@@ -8,7 +8,7 @@ RUN npm i -g turbo
 FROM base AS pruner
 WORKDIR /app
 COPY . .
-RUN turbo prune --scope=tickets --docker
+RUN turbo prune --scope=expiration --docker
 
 # Add lockfile and package.json's of isolated subworkspace
 FROM base AS installer
@@ -27,9 +27,9 @@ RUN pnpm install
 COPY --from=pruner /app/out/full/ .
 COPY turbo.json turbo.json
 # RUN turbo build --filter=api...
-# RUN turbo dev --filter=tickets...
+# RUN turbo dev --filter=expiration...
 
-CMD ["turbo", "run", "dev", "--filter=tickets"]
+CMD ["turbo", "run", "dev", "--filter=expiration"]
 
 
 # FROM base AS runner
