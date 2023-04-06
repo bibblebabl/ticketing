@@ -34,6 +34,14 @@ build:
             dest: .
       docker:
         dockerfile: apps/orders/Dockerfile
+    - image: bibblebabl/expiration
+      context: .
+      sync:
+        manual:
+          - src: src/**/*.ts
+            dest: .
+      docker:
+        dockerfile: apps/expiration/Dockerfile
   local:
     push: false
 manifests:

@@ -7,7 +7,7 @@ import { Order } from '../models/order'
 import { Ticket } from '../models/ticket'
 import { natsWrapper } from '../nats-wrapper'
 
-const EXPIRATION_WINDOW_SECONDS = 15 * 60 * 1000 // 15 minutes
+const EXPIRATION_WINDOW_SECONDS = 1 * 60 // 1 minute
 
 export const ticketValidator = [
   body('ticketId')
@@ -37,7 +37,7 @@ export const createOrderController = async (req: Request, res: Response) => {
   const expiration = new Date()
   expiration.setSeconds(expiration.getSeconds() + EXPIRATION_WINDOW_SECONDS)
 
-  const order = new Order({
+  const order = Order.build({
     userId: req.currentUser!.id,
     status: OrderStatus.Created,
     expiresAt: expiration,
