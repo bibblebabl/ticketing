@@ -3,8 +3,6 @@ import dotenv from 'dotenv-safe'
 
 dotenv.config()
 
-export const QUEUE_GROUP_NAME = 'orders-service'
-
 export const env = cleanEnv(process.env, {
   JWT_KEY: str(),
   MONGO_URI: str(),

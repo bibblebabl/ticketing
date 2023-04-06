@@ -1,7 +1,8 @@
 import { Message } from 'node-nats-streaming'
 import { Listener, NotFoundError, Subjects, TicketUpdatedEvent } from '@bibblebabl/common'
-import { QUEUE_GROUP_NAME } from '../../config'
+
 import { Ticket } from '../../models/ticket'
+import { QUEUE_GROUP_NAME } from './queue-group-name'
 
 export class TicketUpdatedListener extends Listener<TicketUpdatedEvent> {
   readonly subject = Subjects.TicketUpdated

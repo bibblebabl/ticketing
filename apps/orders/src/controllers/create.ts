@@ -7,7 +7,7 @@ import { Order } from '../models/order'
 import { Ticket } from '../models/ticket'
 import { natsWrapper } from '../nats-wrapper'
 
-const EXPIRATION_WINDOW_SECONDS = 1 * 60 // 15 minutes
+const EXPIRATION_WINDOW_SECONDS = 1 * 60 // 1 minute
 
 export const ticketValidator = [
   body('ticketId')
