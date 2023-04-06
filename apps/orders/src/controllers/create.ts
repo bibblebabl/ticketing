@@ -37,7 +37,7 @@ export const createOrderController = async (req: Request, res: Response) => {
   const expiration = new Date()
   expiration.setSeconds(expiration.getSeconds() + EXPIRATION_WINDOW_SECONDS)
 
-  const order = new Order({
+  const order = Order.build({
     userId: req.currentUser!.id,
     status: OrderStatus.Created,
     expiresAt: expiration,

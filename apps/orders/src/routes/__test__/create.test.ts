@@ -22,7 +22,7 @@ it('returns an error if the ticket is already reserved', async () => {
 
   await ticket.save()
 
-  const order = new Order({
+  const order = Order.build({
     ticket,
     userId: '123',
     status: OrderStatus.Created,
