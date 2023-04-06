@@ -1,5 +1,5 @@
 import { env } from './config'
-import { OrderCreatedListener } from './listeners/order-created-listener'
+import { OrderCreatedListener } from './events/listeners/order-created-listener'
 import { natsWrapper } from './nats-wrapper'
 
 const start = async () => {
