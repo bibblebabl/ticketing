@@ -19,9 +19,9 @@ export class ExpirationCompleteListener extends Listener<ExpirationCompleteEvent
       status: OrderStatus.Cancelled,
     })
 
-    order.save()
+    await order.save()
 
-    new OrderCancelledPublisher(this.client).publish({
+    await new OrderCancelledPublisher(this.client).publish({
       id: order.id,
       version: order.version,
       ticket: {
