@@ -1,21 +1,20 @@
-import { model, Schema, Document, Model } from 'mongoose'
 import { OrderStatus } from '@bibblebabl/common'
-import { TicketDoc } from './ticket'
+import { model, Model, Document, Schema } from 'mongoose'
 import { updateIfCurrentPlugin } from 'mongoose-update-if-current'
 
 interface OrderAttrs {
+  id: string
+  version: number
   userId: string
+  price: number
   status: OrderStatus
-  expiresAt: Date
-  ticket: TicketDoc
 }
 
 interface OrderDoc extends Document {
-  userId: string
-  status: OrderStatus
-  expiresAt: Date
-  ticket: TicketDoc
   version: number
+  userId: string
+  price: number
+  status: OrderStatus
 }
 
 interface OrderModel extends Model<OrderDoc> {
@@ -28,18 +27,15 @@ const orderSchema = new Schema(
       type: String,
       required: true,
     },
+    price: {
+      type: Number,
+      required: true,
+    },
     status: {
       type: String,
       required: true,
       enum: Object.values(OrderStatus),
       default: OrderStatus.Created,
-    },
-    expiresAt: {
-      type: Schema.Types.Date,
-    },
-    ticket: {
-      type: Schema.Types.ObjectId,
-      ref: 'Ticket',
     },
   },
   {
@@ -56,9 +52,13 @@ orderSchema.set('versionKey', 'version')
 orderSchema.plugin(updateIfCurrentPlugin)
 
 orderSchema.statics.build = (attrs: OrderAttrs) => {
-  return new Order(attrs)
+  return new Order({
+    _id: attrs.id,
+    version: attrs.version,
+    price: attrs.price,
+    userId: attrs.userId,
+    status: attrs.status,
+  })
 }
 
-const Order = model<OrderDoc, OrderModel>('Order', orderSchema)
-
-export { Order }
+export const Order = model<OrderDoc, OrderModel>('Order', orderSchema)
