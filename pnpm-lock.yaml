@@ -204,6 +204,8 @@ importers:
       '@types/mongoose': ^5.11.97
       '@types/supertest': ^2.0.12
       cookie-session: ^2.0.0
+      dotenv-safe: ^8.2.0
+      envalid: ^7.3.1
       express: ^4.18.2
       express-async-errors: ^3.1.1
       express-validator: ^6.14.2
@@ -226,6 +228,8 @@ importers:
       '@types/jsonwebtoken': 8.5.9
       '@types/mongoose': 5.11.97
       cookie-session: 2.0.0
+      dotenv-safe: 8.2.0
+      envalid: 7.3.1
       express: 4.18.2
       express-async-errors: 3.1.1_express@4.18.2
       express-validator: 6.14.2
