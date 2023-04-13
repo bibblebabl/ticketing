@@ -1,11 +1,15 @@
 import { requireAuth, validateRequest } from '@bibblebabl/common'
 import express from 'express'
-import { newPaymentController, newPaymentValidator } from '../controller/new'
+import { createPaymentController, createPaymentValidator } from '../controller/create'
 
 const paymentsRouter = express.Router()
 
-paymentsRouter.post('/', requireAuth, (req, res) => {
-  console.log(req)
-})
+paymentsRouter.post(
+  '/',
+  requireAuth,
+  createPaymentValidator,
+  validateRequest,
+  createPaymentController,
+)
 
 export { paymentsRouter }

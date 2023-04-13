@@ -5,9 +5,10 @@ import cookieSession from 'cookie-session'
 import { currentUser, errorHandler, NotFoundError } from '@bibblebabl/common'
 import { paymentsRouter } from './routes'
 
+const app = express()
+
 export const apIRoute = '/api/payments'
 
-const app = express()
 app.set('trust proxy', true)
 app.use(json())
 app.use(
