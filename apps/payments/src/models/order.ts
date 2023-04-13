@@ -61,4 +61,4 @@ orderSchema.statics.build = (attrs: OrderAttrs) => {
   })
 }
 
-const Order = model<OrderDoc, OrderModel>('Order', orderSchema)
+export const Order = model<OrderDoc, OrderModel>('Order', orderSchema)
