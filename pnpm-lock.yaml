@@ -219,6 +219,7 @@ importers:
       mongoose: ^6.10.4
       mongoose-update-if-current: ^1.4.0
       node-nats-streaming: ^0.3.2
+      stripe: ^12.1.0
       supertest: ^6.3.1
       ts-jest: ^29.0.3
       ts-node-dev: ^2.0.0
@@ -244,6 +245,7 @@ importers:
       mongoose: 6.10.4
       mongoose-update-if-current: 1.4.0_mongoose@6.10.4
       node-nats-streaming: 0.3.2
+      stripe: 12.1.0
       ts-node-dev: 2.0.0_o6avl3oodj6mwqsx3rm2wfkgv4
       typescript: 4.9.5
     devDependencies:
@@ -6388,6 +6390,14 @@ packages:
   /strip-json-comments/3.1.1:
     resolution: {integrity: sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==}
     engines: {node: '>=8'}
+
+  /stripe/12.1.0:
+    resolution: {integrity: sha512-mq0Rsc4KD3IfmmMqlXjxpYTYfc5rFJidZdppo4TPU3vm5d9ylIBykA0XCQtzNkEe9dRLN88XMmeEZW68thYtWw==}
+    engines: {node: '>=12.*'}
+    dependencies:
+      '@types/node': 18.15.11
+      qs: 6.11.0
+    dev: false
 
   /strnum/1.0.5:
     resolution: {integrity: sha512-J8bbNyKKXl5qYcR36TIO8W3mVGVHrmmxsd5PAItGkmyzwJvybiw2IVq5nqd0i4LSNSkB/sx9VHllbfFdr9k1JA==}
