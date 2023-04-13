@@ -4,6 +4,7 @@ import { generateMongooseId, signIn } from '../../../test/helpers'
 import { Order } from '../../models/order'
 import { OrderStatus } from '@bibblebabl/common'
 import { stripe } from '../../stripe'
+import { Payment } from '../../models/payment'
 
 const apiUrl = '/api/payments'
 
@@ -93,4 +94,11 @@ it('returns a 204 with valid inputs', async () => {
 
   expect(stripeCharge).toBeDefined()
   expect(stripeCharge?.currency).toEqual('usd')
+
+  const payment = await Payment.findOne({
+    orderId: order.id,
+    stripeId: stripeCharge?.id,
+  })
+
+  expect(payment).not.toBeNull()
 })
