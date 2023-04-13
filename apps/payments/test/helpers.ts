@@ -5,10 +5,10 @@ export const generateMongooseId = () => {
   return new mongoose.Types.ObjectId().toHexString()
 }
 
-export const signIn = () => {
+export const signIn = (id?: string) => {
   // Build a JWT payload.  { id, email }
   const payload = {
-    id: generateMongooseId(),
+    id: id || generateMongooseId(),
     email: 'test@test.com',
   }
 
