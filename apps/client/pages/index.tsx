@@ -1,6 +1,4 @@
 import { NextPageContext } from 'next'
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
 import { buildClient } from '../api/build-client'
 import Link from 'next/link'
 
@@ -35,9 +33,7 @@ const Home = ({ tickets }: { tickets: Ticket[] }) => {
                 <td>{ticket.title}</td>
                 <td>{ticket.price}</td>
                 <td>
-                  <Link href="/tickets/[ticketId]" as={`/tickets/${ticket.id}`}>
-                    View
-                  </Link>
+                  <Link href={`/tickets/${ticket.id}`}>View</Link>
                 </td>
               </tr>
             )
