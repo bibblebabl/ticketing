@@ -18,6 +18,16 @@ export const Header = ({ currentUser }: { currentUser: UserPayload | null }) => 
       href: '/auth/sign-out',
       show: Boolean(currentUser),
     },
+    {
+      label: 'Sell Tickets',
+      href: '/tickets/new',
+      show: Boolean(currentUser),
+    },
+    {
+      label: 'My Orders',
+      href: '/orders',
+      show: Boolean(currentUser),
+    },
   ]
 
   return (
