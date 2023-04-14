@@ -1,6 +1,5 @@
 import { NextPageContext } from 'next'
 import Head from 'next/head'
-import { buildClient } from '../api/build-client'
 import styles from '../styles/Home.module.css'
 
 type User = {
@@ -27,10 +26,8 @@ const Home = ({ currentUser }: { currentUser: null | User }) => {
 }
 
 Home.getInitialProps = async (ctx: NextPageContext) => {
-  const client = buildClient(ctx)
-  const { data } = await client.get('/api/users/currentuser')
-
-  return data
+  console.log(ctx)
+  return {}
 }
 
 export default Home
