@@ -14,7 +14,9 @@ const AppComponent = ({
   return (
     <div>
       <Header currentUser={currentUser} />
-      <Component currentUser={currentUser} client={client} {...pageProps} />
+      <div className="container">
+        <Component currentUser={currentUser} client={client} {...pageProps} />
+      </div>
     </div>
   )
 }
