@@ -1,18 +1,7 @@
 import { NextPageContext } from 'next'
 import { buildClient } from '../api/build-client'
 import Link from 'next/link'
-
-type User = {
-  id: string
-  email: string
-}
-
-interface Ticket {
-  id: string
-  title: string
-  price: number
-  userId: string
-}
+import { Ticket } from '../types'
 
 const Home = ({ tickets }: { tickets: Ticket[] }) => {
   return (
