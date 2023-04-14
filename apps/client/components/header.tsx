@@ -22,8 +22,8 @@ export const Header = ({ currentUser }: { currentUser: UserPayload | null }) => 
 
   return (
     <nav className="navbar navbar-light bg-light">
-      <Link href="/" className="navbar-brand">
-        Ticketing
+      <Link className="navbar-brand" href="/">
+        GitTix
       </Link>
 
       <div className="d-flex justify-content-end">
@@ -33,7 +33,9 @@ export const Header = ({ currentUser }: { currentUser: UserPayload | null }) => 
             if (el.show) {
               return (
                 <li key={el.href} className="nav-item">
-                  <Link href={el.href}>{el.label}</Link>
+                  <Link className="nav-link" href={el.href}>
+                    {el.label}
+                  </Link>
                 </li>
               )
             }
