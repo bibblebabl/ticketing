@@ -70,6 +70,8 @@ importers:
   apps/client:
     specifiers:
       '@bibblebabl/common': workspace:*
+      '@stripe/react-stripe-js': ^2.1.0
+      '@stripe/stripe-js': ^1.52.1
       '@types/node': 18.11.9
       '@types/react': 18.0.25
       '@types/react-dom': 18.0.8
@@ -83,6 +85,8 @@ importers:
       typescript: 4.8.4
     dependencies:
       '@bibblebabl/common': link:../../packages/common
+      '@stripe/react-stripe-js': 2.1.0_qzwhpr2eo7kmsmscrkh4nijc24
+      '@stripe/stripe-js': 1.52.1
       '@types/node': 18.11.9
       '@types/react': 18.0.25
       '@types/react-dom': 18.0.8
@@ -2047,6 +2051,23 @@ packages:
     dependencies:
       '@sinonjs/commons': 1.8.5
     dev: true
+
+  /@stripe/react-stripe-js/2.1.0_qzwhpr2eo7kmsmscrkh4nijc24:
+    resolution: {integrity: sha512-Zb6Ycrj5QuhYkvtlvvLzo+cysUyA6wkx3zWHQ7uVnHRYRM/n1jtQD6VGBrdmptC8e8PJN6L091gBCyB5P0FqmA==}
+    peerDependencies:
+      '@stripe/stripe-js': ^1.44.1
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@stripe/stripe-js': 1.52.1
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /@stripe/stripe-js/1.52.1:
+    resolution: {integrity: sha512-fza40OPSpGQlFxc5TZWiYC/6Lk89Sep1fLuv9ss33YS6lCAF8UZbfA1E6W+lwO4c7WRKZIZumHIEbPJfP/O9uw==}
+    dev: false
 
   /@swc/helpers/0.4.11:
     resolution: {integrity: sha512-rEUrBSGIoSFuYxwBYtlUFMlE2CwGhmW+w9355/5oduSw8e5h2+Tj4UrAGNNgP9915++wj5vkQo0UuOBqOAq4nw==}

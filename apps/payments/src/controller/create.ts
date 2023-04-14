@@ -8,12 +8,12 @@ import { PaymentCreatedPublisher } from '../events/publishers/payment-created-pu
 import { natsWrapper } from '../nats-wrapper'
 
 export const createPaymentValidator = [
-  body('token').not().isEmpty(),
+  body('paymentMethod').not().isEmpty(),
   body('orderId').not().isEmpty(),
 ]
 
 export const createPaymentController = async (req: Request, res: Response) => {
-  const { token, orderId } = req.body
+  const { paymentMethod, orderId } = req.body
 
   const order = await Order.findById(orderId)
 
@@ -29,15 +29,16 @@ export const createPaymentController = async (req: Request, res: Response) => {
     throw new BadRequestError('Cannot pay for an cancelled order')
   }
 
-  const charge = await stripe.charges.create({
+  const paymentIntent = await stripe.paymentIntents.create({
     currency: 'usd',
     amount: order.price * 100,
-    source: token,
+    payment_method: paymentMethod,
+    confirm: true,
   })
 
   const payment = Payment.build({
     orderId,
-    stripeId: charge.id,
+    stripeId: paymentIntent.id,
   })
 
   await payment.save()

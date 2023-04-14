@@ -30,7 +30,7 @@ const NewTicket = () => {
       return
     }
 
-    setPrice(value.toFixed(2))
+    setPrice(value.toFixed())
   }
   return (
     <div>

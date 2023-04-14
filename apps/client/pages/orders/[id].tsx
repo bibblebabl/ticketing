@@ -4,6 +4,7 @@ import { Order } from '../../types'
 import { useEffect, useState } from 'react'
 import { useRequest } from '../../hooks/use-request'
 import Router from 'next/router'
+import CheckoutForm from '../../components/checkout-form/checkout-form'
 
 const OrderView = ({ order }: { order: Order }) => {
   const [timeLeft, setTimeLeft] = useState(0)
@@ -39,12 +40,7 @@ const OrderView = ({ order }: { order: Order }) => {
   return (
     <div>
       Time left to pay: {timeLeft} seconds
-      {/* <StripeCheckout
-        token={({ id }) => doRequest({ token: id })}
-        stripeKey="pk_test_FlLFVapGHTly3FicMdTU06SC006tWtWbNH"
-        amount={order.ticket.price * 100}
-        email={currentUser.email}
-      /> */}
+      <CheckoutForm orderId={order.id} amount={order.ticket.price} currency="usd" />
       {!!errors.length && (
         <div className="alert alert-danger">
           <h4>Oopss...</h4>
