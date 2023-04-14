@@ -1,13 +1,20 @@
 import { NextPageContext } from 'next'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
+import { buildClient } from '../api/build-client'
 
 type User = {
   id: string
   email: string
 }
 
-const Home = ({ currentUser }: { currentUser: null | User }) => {
+interface Ticket {
+  title: string
+  price: number
+  userId: string
+}
+
+const Home = ({ currentUser, tickets }: { currentUser: null | User; tickets: Ticket[] }) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -17,17 +24,35 @@ const Home = ({ currentUser }: { currentUser: null | User }) => {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          {currentUser ? `User email: ${currentUser.email}` : `You are not signed in`}
-        </h1>
+        <h1>Tickets</h1>
+        <table>
+          <thead className="table">
+            <tr>
+              <th>Title</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            {tickets.map((ticket) => (
+              <tr key={ticket.title}>
+                <td>{ticket.title}</td>
+                <td>{ticket.price}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </main>
     </div>
   )
 }
 
 Home.getInitialProps = async (ctx: NextPageContext) => {
-  console.log(ctx)
-  return {}
+  const client = buildClient(ctx)
+  const { data } = await client.get('/api/tickets')
+
+  return {
+    tickets: data,
+  }
 }
 
 export default Home

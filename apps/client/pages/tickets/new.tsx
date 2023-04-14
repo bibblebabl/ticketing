@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useRequest } from '../../hooks/use-request'
+import Router from 'next/router'
 
 const NewTicket = () => {
   const [title, setTitle] = useState('')
@@ -13,9 +14,7 @@ const NewTicket = () => {
         price,
       },
     },
-    function onSuccess(ticket) {
-      console.log(ticket)
-    },
+    () => Router.push('/'),
   )
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -55,7 +54,7 @@ const NewTicket = () => {
             onChange={(e) => setPrice(e.target.value)}
           />
         </div>
-        {errors.length && (
+        {!!errors.length && (
           <div className="alert alert-danger">
             <h4>Oopss...</h4>
             <ul className="my-0">

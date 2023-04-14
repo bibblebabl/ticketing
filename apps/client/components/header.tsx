@@ -2,7 +2,6 @@ import Link from 'next/link'
 import { UserPayload } from '../types/user'
 
 export const Header = ({ currentUser }: { currentUser: UserPayload | null }) => {
-  console.log(currentUser)
   const links = [
     {
       label: 'Sign up',
@@ -28,6 +27,7 @@ export const Header = ({ currentUser }: { currentUser: UserPayload | null }) => 
       </Link>
 
       <div className="d-flex justify-content-end">
+        {currentUser ? <span className="nav-item">Signed in as {currentUser.email}</span> : null}
         <ul className="nav d-flex align-items-center">
           {links.map((el) => {
             if (el.show) {

@@ -8,14 +8,13 @@ import { AxiosInstance } from 'axios'
 const AppComponent = ({
   Component,
   pageProps,
-  client,
   currentUser,
-}: AppProps & { currentUser: UserPayload | null; client: AxiosInstance }) => {
+}: AppProps & { currentUser: UserPayload | null }) => {
   return (
     <div>
       <Header currentUser={currentUser} />
       <div className="container">
-        <Component currentUser={currentUser} client={client} {...pageProps} />
+        <Component currentUser={currentUser} {...pageProps} />
       </div>
     </div>
   )
@@ -35,7 +34,6 @@ AppComponent.getInitialProps = async ({ ctx, Component }: AppContext) => {
 
   return {
     pageProps,
-    client,
     currentUser: data.currentUser,
   }
 }
