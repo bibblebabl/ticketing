@@ -1,12 +1,28 @@
 import { useState } from 'react'
+import { useRequest } from '../../hooks/use-request'
 
 const NewTicket = () => {
   const [title, setTitle] = useState('')
   const [price, setPrice] = useState('')
+  const { makeRequest, errors } = useRequest(
+    {
+      url: '/api/tickets',
+      method: 'post',
+      data: {
+        title,
+        price,
+      },
+    },
+    function onSuccess(ticket) {
+      console.log(ticket)
+    },
+  )
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     console.log('submit')
+
+    makeRequest()
   }
   const onBlur = () => {
     const value = parseFloat(price)
@@ -39,6 +55,16 @@ const NewTicket = () => {
             onChange={(e) => setPrice(e.target.value)}
           />
         </div>
+        {errors.length && (
+          <div className="alert alert-danger">
+            <h4>Oopss...</h4>
+            <ul className="my-0">
+              {errors.map((err) => (
+                <li key={err.message}>{err.message}</li>
+              ))}
+            </ul>
+          </div>
+        )}
         <button className="btn btn-primary">Submit</button>
       </form>
     </div>
