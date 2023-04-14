@@ -15,7 +15,9 @@ const TicketView = ({ ticket }: { ticket: Ticket }) => {
         ticketId: ticket.id,
       },
     },
-    (order: Order) => Router.push(`/orders/${order.id}`),
+    (order: Order) => {
+      Router.push(`/orders/${order.id}`)
+    },
   )
 
   const handlePurchase = async () => {
