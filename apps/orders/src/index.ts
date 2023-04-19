@@ -32,7 +32,7 @@ const start = async () => {
   }
 
   app.listen(3000, () => {
-    console.log(`Auth Server listening on ${3000}`)
+    console.log(`Orders Server listening on ${3000}`)
   })
 }
 

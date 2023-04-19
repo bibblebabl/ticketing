@@ -22,13 +22,13 @@ const start = async () => {
     new OrderCancelledListener(natsWrapper.client).listen()
 
     await mongoose.connect(env.MONGO_URI)
-    console.log('Connected to Tickets MongoDB')
+    console.log('Connected to Payments MongoDB')
   } catch (error) {
     console.error(error)
   }
 
   app.listen(3000, () => {
-    console.log(`Auth Server listening on ${3000}`)
+    console.log(`Payments Server listening on ${3000}`)
   })
 }
 
