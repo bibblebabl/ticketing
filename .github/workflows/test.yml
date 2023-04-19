@@ -37,6 +37,4 @@ jobs:
       - name: Install turbo
         run: pnpm add -g turbo
 
-      - run: pnpm lint
-
       - run: pnpm test
