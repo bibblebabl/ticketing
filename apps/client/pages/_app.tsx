@@ -3,6 +3,7 @@ import type { AppContext, AppProps } from 'next/app'
 import { buildClient } from '../api/build-client'
 import { Header } from '../components/header'
 import { UserPayload } from '../types/user'
+import { AxiosInstance } from 'axios'
 
 const AppComponent = ({
   Component,
@@ -12,7 +13,9 @@ const AppComponent = ({
   return (
     <div>
       <Header currentUser={currentUser} />
-      <Component {...pageProps} />
+      <div className="container">
+        <Component currentUser={currentUser} {...pageProps} />
+      </div>
     </div>
   )
 }
@@ -26,6 +29,7 @@ AppComponent.getInitialProps = async ({ ctx, Component }: AppContext) => {
       currentUser: UserPayload | null
     }
   } = await client.get('/api/users/currentuser')
+
   const pageProps = Component.getInitialProps ? await Component.getInitialProps(ctx) : {}
 
   return {

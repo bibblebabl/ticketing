@@ -6,14 +6,17 @@ type CustomError = { message: string; field?: string }
 export function useRequest(config: AxiosRequestConfig, onSuccess?: (data: any) => void) {
   const [errors, setErrors] = useState<CustomError[]>([])
 
-  const makeRequest = async () => {
+  const makeRequest = async (data = {}) => {
     setErrors([])
 
     try {
       const response = await axios({
         method: config.method,
         url: config.url,
-        data: config.data,
+        data: {
+          ...config.data,
+          ...data,
+        },
       })
 
       if (onSuccess) {

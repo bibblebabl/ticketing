@@ -2,7 +2,6 @@ import Link from 'next/link'
 import { UserPayload } from '../types/user'
 
 export const Header = ({ currentUser }: { currentUser: UserPayload | null }) => {
-  console.log(currentUser)
   const links = [
     {
       label: 'Sign up',
@@ -19,21 +18,34 @@ export const Header = ({ currentUser }: { currentUser: UserPayload | null }) => 
       href: '/auth/sign-out',
       show: Boolean(currentUser),
     },
+    {
+      label: 'Sell Tickets',
+      href: '/tickets/new',
+      show: Boolean(currentUser),
+    },
+    {
+      label: 'My Orders',
+      href: '/orders',
+      show: Boolean(currentUser),
+    },
   ]
 
   return (
     <nav className="navbar navbar-light bg-light">
-      <Link href="/" className="navbar-brand">
-        Ticketing
+      <Link className="navbar-brand" href="/">
+        GitTix
       </Link>
 
       <div className="d-flex justify-content-end">
+        {currentUser ? <span className="nav-item">Signed in as {currentUser.email}</span> : null}
         <ul className="nav d-flex align-items-center">
           {links.map((el) => {
             if (el.show) {
               return (
                 <li key={el.href} className="nav-item">
-                  <Link href={el.href}>{el.label}</Link>
+                  <Link className="nav-link" href={el.href}>
+                    {el.label}
+                  </Link>
                 </li>
               )
             }

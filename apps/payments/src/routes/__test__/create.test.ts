@@ -8,12 +8,14 @@ import { Payment } from '../../models/payment'
 
 const apiUrl = '/api/payments'
 
+const paymentMethod = 'pm_card_visa'
+
 it('returns a 404 when purchasing an order that does not exist', async () => {
   await request(app)
     .post(apiUrl)
     .set('Cookie', signIn())
     .send({
-      token: 'token',
+      paymentMethod,
       orderId: generateMongooseId(),
     })
     .expect(404)
@@ -34,7 +36,7 @@ it('returns a 401 when purchasing an order that does not belong to the user', as
     .post(apiUrl)
     .set('Cookie', signIn())
     .send({
-      token: 'token',
+      paymentMethod,
       orderId: order.id,
     })
     .expect(401)
@@ -56,7 +58,7 @@ it('returns a 400 when purchasing a cancelled order', async () => {
     .post(apiUrl)
     .set('Cookie', signIn(userId))
     .send({
-      token: 'token',
+      paymentMethod,
       orderId: order.id,
     })
     .expect(400)
@@ -65,7 +67,6 @@ it('returns a 400 when purchasing a cancelled order', async () => {
 it('returns a 204 with valid inputs', async () => {
   const userId = generateMongooseId()
   const price = Math.floor(Math.random() * 100000)
-  const token = 'tok_visa'
 
   const order = await Order.build({
     id: generateMongooseId(),
@@ -81,23 +82,21 @@ it('returns a 204 with valid inputs', async () => {
     .post(apiUrl)
     .set('Cookie', signIn(userId))
     .send({
-      token,
+      paymentMethod,
       orderId: order.id,
     })
     .expect(201)
 
-  const stripeCharges = await stripe.charges.list({ limit: 50 })
+  const paymentIntents = await stripe.paymentIntents.list({ limit: 50 })
 
-  const stripeCharge = stripeCharges.data.find((charge) => {
-    return charge.amount === price * 100
-  })
+  const stripePaymentIntent = paymentIntents.data.find((intent) => intent.amount === price * 100)
 
-  expect(stripeCharge).toBeDefined()
-  expect(stripeCharge?.currency).toEqual('usd')
+  expect(stripePaymentIntent).toBeDefined()
+  expect(stripePaymentIntent?.currency).toEqual('usd')
 
   const payment = await Payment.findOne({
     orderId: order.id,
-    stripeId: stripeCharge?.id,
+    stripeId: stripePaymentIntent?.id,
   })
 
   expect(payment).not.toBeNull()
