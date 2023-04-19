@@ -7,7 +7,8 @@
     "build": "tsc",
     "start": "ts-node-dev --poll src/index.ts",
     "dev": "ts-node-dev --poll src/index.ts",
-    "test": "jest --watchAll --no-cache --detectOpenHandles"
+    "test:dev": "jest --watchAll --no-cache --detectOpenHandles",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
