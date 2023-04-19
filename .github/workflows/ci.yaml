@@ -32,5 +32,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - run: pnpm turbo run lint
-      - run: pnpm manypkg check
+      - name: Install turbo
+        run: pnpm add -g turbo
+
+      - run: pnpm lint
+
+      - run: pnpm test
