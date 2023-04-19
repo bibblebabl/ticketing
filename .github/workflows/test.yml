@@ -33,5 +33,10 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
-      - name: Test
-        run: pnpm test
+
+      - name: Install turbo
+        run: pnpm add -g turbo
+
+      - run: pnpm lint
+
+      - run: pnpm test
