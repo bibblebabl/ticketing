@@ -8,29 +8,45 @@ on:
 
 jobs:
   build:
-    name: Build and Test
+    name: Lint and Test
     runs-on: ubuntu-latest
 
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+
     steps:
-      - name: Check out code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
         with:
-          fetch-depth: 2
+          fetch-depth: 0
 
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 7
-
-      - name: Use Node.js
+      - name: Install Node.js
         uses: actions/setup-node@v3
         with:
-          cache: 'pnpm'
+          node-version: 16
+
+      - uses: pnpm/action-setup@v2.2.4
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          run_install: false
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        run: |
+          echo "pnpm_cache_dir=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build
-        run: pnpm build
+      - run: pnpm turbo run lint
 
-      - name: Test
-        run: pnpm test
+      - run: pnpm turbo run test
