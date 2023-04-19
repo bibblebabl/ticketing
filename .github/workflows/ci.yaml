@@ -1,42 +1,36 @@
 name: CI
 
 on:
-  push:
-    branches: ['main']
   pull_request:
-    types: [opened, synchronize]
+    branches: ['*']
+  merge_group:
+
+env:
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
 
 jobs:
-  build:
-    name: Build and Test
-    timeout-minutes: 15
+  lint:
     runs-on: ubuntu-latest
-    # To use Remote Caching, uncomment the next lines and follow the steps below.
-    # env:
-    #  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-    #  TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
-
+    name: Run ESLint
     steps:
-      - name: Check out code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
         with:
-          fetch-depth: 2
+          fetch-depth: 0
 
-      - uses: pnpm/action-setup@v2.0.1
-        with:
-          version: 6.32.2
-
-      - name: Setup Node.js environment
+      - name: Install Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 16
-          cache: 'pnpm'
+
+      - uses: pnpm/action-setup@v2.2.4
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          run_install: false
 
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build
-        run: pnpm build
-
-      - name: Test
-        run: pnpm test
+      - run: pnpm turbo run lint
+      - run: pnpm manypkg check
