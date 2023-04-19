@@ -6,9 +6,7 @@
   "scripts": {
     "build": "tsc",
     "start": "ts-node-dev --poll src/index.ts",
-    "dev": "ts-node-dev --poll src/index.ts",
-    "test:dev": "jest --watchAll --no-cache --detectOpenHandles",
-    "test": "jest"
+    "dev": "ts-node-dev --poll src/index.ts"
   },
   "keywords": [],
   "author": "",
