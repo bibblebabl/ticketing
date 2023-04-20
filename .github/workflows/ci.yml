@@ -12,24 +12,20 @@ jobs:
     name: Run Tests
     timeout-minutes: 15
 
-    strategy:
-      matrix:
-        node-version: [16.x]
-
     steps:
       - uses: actions/checkout@v3
       - uses: pnpm/action-setup@v2
         with:
           version: 7
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js 16
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 16
           cache: 'pnpm'
 
       - name: Install deps
         run: pnpm install
 
       - name: Run tests
-        run: pnpm test
+        run: pnpm test:ci
