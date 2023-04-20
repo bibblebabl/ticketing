@@ -1,9 +1,10 @@
 name: tests-auth
 
 on:
+  push:
+    branches: ['main']
   pull_request:
-    paths:
-      - 'apps/auth/**'
+    types: [opened, synchronize]
 
 jobs:
   build:
