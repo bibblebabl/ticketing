@@ -4,18 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "pnpx turbo run build",
-    "clean": "pnpx turbo run clean",
-    "dev": "pnpx turbo run dev",
+    "build": "turbo run build",
+    "clean": "turbo run clean",
+    "dev": "turbo run dev",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "lint": "pnpx turbo run lint",
-    "test": "pnpx turbo run test"
+    "lint": "turbo run lint",
+    "test": "turbo run test"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "eslint": "^8.37.0",
-    "prettier": "^2.8.7"
+    "prettier": "^2.8.7",
+    "turbo": "^1.9.3"
   }
 }
