@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'app/auth/**'
+      - 'apps/auth/**'
 
 jobs:
   build:
