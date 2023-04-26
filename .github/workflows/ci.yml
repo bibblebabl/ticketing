@@ -12,6 +12,10 @@ jobs:
     name: Run Tests
     timeout-minutes: 15
 
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+
     steps:
       - uses: actions/checkout@v3
       - uses: pnpm/action-setup@v2
