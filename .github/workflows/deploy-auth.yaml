@@ -2,7 +2,8 @@ name: deploy-auth
 
 on:
   push:
-    branches: ['main']
+    branches:
+      - main
     paths:
       - 'app/auth/**'
 
