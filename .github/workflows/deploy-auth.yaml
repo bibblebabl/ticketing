@@ -1,0 +1,26 @@
+name: deploy-auth
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'app/auth/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build docker image
+        run: docker build -t bibblebabl/auth -f apps/auth/Dockerfile .
+
+      - name: Login to DockerHub and push image
+        run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Push image
+        run: docker push bibblebabl/auth
