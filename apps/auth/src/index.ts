@@ -9,7 +9,7 @@ const env = cleanEnv(process.env, {
 })
 
 const start = async () => {
-  console.log('Starting up...!')
+  console.log('Starting up Auth Service')
   if (!process.env.JWT_KEY) {
     throw new Error('process.env.JWT_KEY must be defined')
   }

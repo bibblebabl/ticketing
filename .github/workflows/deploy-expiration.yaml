@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'apps/auth/**'
+      - 'apps/expiration/**'
 
 jobs:
   build:
@@ -14,7 +14,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Build docker image
-        run: docker build -t bibblebabl/auth -f apps/auth/Dockerfile .
+        run: docker build -t bibblebabl/expiration -f apps/expiration/Dockerfile .
 
       - name: Login to DockerHub and push image
         run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
@@ -23,7 +23,7 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Push image
-        run: docker push bibblebabl/auth
+        run: docker push bibblebabl/expiration
 
       - uses: digitalocean/action-doctl@v2
         with:
@@ -31,4 +31,4 @@ jobs:
 
       - run: doctl kubernetes cluster kubeconfig save ticketing
 
-      - run: kubectl rollout restart deployment auth-depl
+      - run: kubectl rollout restart deployment expiration-depl
