@@ -24,3 +24,11 @@ jobs:
 
       - name: Push image
         run: docker push bibblebabl/auth
+
+      - uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - run: doctl kubernetes cluster kubeconfig save ticketing
+
+      - run: kubectl rollout restart deployment auth-depl
