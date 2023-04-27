@@ -1,0 +1,34 @@
+name: deploy-client
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'apps/client/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build docker image
+        run: docker build -t bibblebabl/client -f apps/client/Dockerfile .
+
+      - name: Login to DockerHub and push image
+        run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Push image
+        run: docker push bibblebabl/client
+
+      - uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - run: doctl kubernetes cluster kubeconfig save ticketing
+
+      - run: kubectl rollout restart deployment client-depl
