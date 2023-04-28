@@ -15,6 +15,7 @@ spec:
       containers:
         - name: auth
           image: bibblebabl/auth
+          imagePullPolicy: Always
           # image: us.gcr.io/ticketing-dev-367523/auth // gcloud
           env:
             - name: MONGO_URI
